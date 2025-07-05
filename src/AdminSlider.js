@@ -44,10 +44,13 @@ const AdminSlider = () => {
     try {
       setLoading(true);
       setMessage("");
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/upload-images`, {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/upload-images`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       const result = await res.json();
       setMessage(result.message || "Images uploaded successfully");
       setSelectedFiles([]);
@@ -64,9 +67,12 @@ const AdminSlider = () => {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
     try {
       setDeletingId(id);
-      const res = await fetch(`http://localhost:5000/api/delete-image/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/delete-image/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const result = await res.json();
       setMessage(result.message || "Image deleted successfully");
       setSliderImages((prev) => prev.filter((img) => img._id !== id));
